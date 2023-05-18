@@ -1,5 +1,9 @@
 const express = require('express')
+const cookieParser = require("cookie-parser")
 const userRouter = express.Router();
+
+userRouter.use(cookieParser());
+
 const { protect } = require('../Middlewares/authMiddleware')
 const { signUp,
     updateUser,

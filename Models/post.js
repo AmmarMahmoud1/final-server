@@ -20,8 +20,9 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.ObjectId,
     ref: 'User',
+
    
   },
   Address:{

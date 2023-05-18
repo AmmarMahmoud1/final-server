@@ -1,9 +1,9 @@
+const cookieParser = require('cookie-parser')
 const Post = require('../Models/post');
 const User = require('../Models/User')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('../config');
-
 
 const getPosts = async (req, res) =>{
 const posts = (await Post.find({postType:"Offer"}).catch(err => console.log(err)) );
@@ -33,13 +33,27 @@ const getJobs = async (req, res ) =>{
 
 const addPost = async (req, res, next) => {
   const token = req.cookies.token;
-  console.log(token)
-  const decoded = jwt.verify(token, config.secretKey);
-    req.userId = decoded.userId;
+  console.log(req.cookies)
+  // const token = req.cookies.token;
+  
+  // if (!token) {
+  //   return res.status(401).json({ message: 'Authentication required.' });
+  // }
+  
+  // try {
+  //   const decoded = jwt.verify(token, config.secretKey);
+  //   req.userId = decoded.userId;
+
+
+  const decoded = jwt.verify(token, 'Ammar221');
+  req.userId = decoded.userId;
+  console.log(req.userId);
+
   try {
     
-    const {postType, title, category, content, Address, zipCode,} = req.body;
+    const {postType, title, category, content, Address, zipCode} = req.body;
     const {userId} = req.userId;
+    console.log(userId + 'user id to DB')
     const newPost = await Post.create({postType, title, category, content, Address, zipCode, userId});
     return res.status(201).json(newPost)
   } catch (error) {

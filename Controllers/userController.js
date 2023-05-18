@@ -26,17 +26,18 @@ const config = require('../config');
     email,
     password: hashedPassword,
   })
-
+  let token = jwt.sign({ userId: user._id }, config.secretKey);
+  res.cookie('token', token, config.cookieOptions);
   if (user) {
     res.status(201).json({
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
+      token: token,
     })
   } else {
     res.status(400)
-    throw new Error('Invalid Profile data')
+    throw new Error('Invalid User data')
   }
 
 }

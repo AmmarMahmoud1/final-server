@@ -1,11 +1,14 @@
 
 const express = require('express')
+const cookieParser = require("cookie-parser")
+
 const postRouter = express.Router();
 
 const{
     getJobs, getPosts, getServices, addPost, updatePost, deletePost
 } = require('../Controllers/postController')
 
+postRouter.use(cookieParser());
 
 postRouter.route('/').get(getPosts)
 postRouter.route('/services').get(getServices)
