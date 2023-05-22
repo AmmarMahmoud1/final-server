@@ -3,11 +3,12 @@ const Post = require('../Models/post');
 const User = require('../Models/User')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const config = require('../config');
+const cloudinary = require('../utils/cloudinary')
+const upload = require('../utils/multer')
+
 
 const getOffers = async (req, res) =>{
 const posts = (await Post.find({postType:"Offer"}).catch(err => console.log(err)) );
-console.log(posts)
 res.status(200).json(posts);
 
 }
@@ -38,31 +39,42 @@ const getJobs = async (req, res ) =>{
 
 
 
-const addPost = async (req, res, next) => {
-  const token = req.cookies.token;
-  console.log(req.cookies)
+// const addPost = async (req, res, next) => {
+//   const token = req.cookies.token;
+//  const {image} = req.body
 
-  let decoded = jwt.verify(token, 'Ammar221');
-   req.userId = decoded.userId;
-  console.log(req.userId);
+//   let decoded = jwt.verify(token, 'Ammar221');
+//    req.userId = decoded.userId;
+  
+   
+//   try {
+   
+//  const result = await cloudinary.uploader.upload(image, {
+//     folder : "images",
+//     width: 300,
+//     crop: 'scale'
+//   })
+//     const newPost = await Post.create({
+//       postType: req.body.postType,
+//       title : req.body.title,
+//       category: req.body.category,
+//       content: req.body.content,
+//       Address: req.body.Address,
+//       zipCode: req.body.zipCode,
+//       userId: req.userId,
+//       image: {
+//          public_id: result.public_id,
+//          url:  result.secure_url,
+//       },
+//     })
 
-  try {
-    
-    // const {postType, title, category, content, Address, zipCode , userId} = req.body;
-    // const {userId} = decoded.userId;
-    const newPost = await Post.create({
-      postType: req.body.postType,
-      title : req.body.title,
-      category: req.body.category,
-      content: req.body.content,
-      Address: req.body.Address,
-      zipCode: req.body.zipCode,
-      userId: req.userId});
-    return res.status(201).json(newPost)
-  } catch (error) {
-    next(error);
-  }
-}
+  
+
+//     return res.status(201).json(newPost)
+//   } catch (error) {
+//     next(error);
+//   }
+// }
 
 const updatePost = async (req , res) =>{
  const post = await Post.findById(req.params.id);
@@ -121,6 +133,12 @@ const deletePost = async (req, res) =>{
 
 }
 
+// const uploadImages = async(req , res) =>{
+
+
+// }
+
+
 module.exports = {
-    getJobs, getOffers, getSearch, getServices, addPost, updatePost, deletePost
+    getJobs, getOffers, getSearch, getServices, updatePost, deletePost,
 }

@@ -3,26 +3,26 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
   category :{
     type: String,
-    required: true
+   
 
   },
    postType :{
     type : String,
-    required : true
+
    },
   title: {
     type: String,
-    required: true
+    
   },
 
   content: {
     type: String,
-    required: true
+   
   },
   userId: {
     type: mongoose.ObjectId,
     ref: 'User',
-    required: true,
+   
 
    
   },
@@ -31,11 +31,18 @@ const postSchema = new mongoose.Schema({
   },
   zipCode :{
     type: String,
-    required :[true, 'Please add the zip code']
+    
   },
-  images : {
+    image: {
+      type: String
+    
+  
+   },
+   cloudinary_id: {
     type: String
-  }
+   }
+
+ 
  
 },
 {
