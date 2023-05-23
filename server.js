@@ -23,7 +23,10 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(cors({
   credentials: true,
-  origin: "*",
+  origin: [
+    'http://localhost:5173',
+    /https:\/\/wd37-rubber-ducks\.netlify\.app/,
+  ],
   optionsSuccessStatus: 200,
 }))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
