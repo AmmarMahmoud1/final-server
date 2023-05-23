@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use(cors({
   credentials: true,
   origin: [
-    'http://localhost:5173',
+    'http://localhost:3000',
     /https:\/\/wd37-rubber-ducks\.netlify\.app/,
   ],
   optionsSuccessStatus: 200,
