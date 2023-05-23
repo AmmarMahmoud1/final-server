@@ -5,7 +5,7 @@ const postRouter = express.Router();
 const jwt = require('jsonwebtoken');
 const fs = require('fs')
 const{
-    getJobs, getOffers, getServices,getSearch,  updatePost, deletePost, uploadImage
+    getJobs, getOffers, getServices,getSearch,  updatePost, deletePost, getAll, uploadImage
 } = require('../Controllers/postController');
 
 const Post = require('../Models/post')
@@ -16,7 +16,7 @@ postRouter.use(cookieParser());
 
 
 
-
+postRouter.route('/').get(getAll)
 postRouter.route('/offers').get(getOffers)
 postRouter.route('/search').get(getSearch)
 postRouter.route('/services').get(getServices)

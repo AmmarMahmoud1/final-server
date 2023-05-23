@@ -7,11 +7,23 @@ const cloudinary = require('../utils/cloudinary')
 const upload = require('../utils/multer')
 
 
+
+const getAll = async(req, res) => {
+
+  const posts = await Post.find({}).catch(err => res.status(500).send('Server Error'))
+  res.status(200).json(posts);
+
+}
+
+
+
 const getOffers = async (req, res) =>{
 const posts = (await Post.find({postType:"Offer"}).catch(err => console.log(err)) );
 res.status(200).json(posts);
 
 }
+
+
 
 const getSearch = async (req, res) =>{
   const posts = (await Post.find({postType:"Search"}).catch(err => console.log(err)) );
@@ -140,5 +152,5 @@ const deletePost = async (req, res) =>{
 
 
 module.exports = {
-    getJobs, getOffers, getSearch, getServices, updatePost, deletePost,
+    getJobs, getOffers, getSearch, getServices, updatePost, deletePost,getAll
 }
