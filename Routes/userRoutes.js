@@ -4,16 +4,18 @@ const userRouter = express.Router();
 
 userRouter.use(cookieParser());
 
-const { protect } = require('../Middlewares/authMiddleware')
+
+
+const {authenticateToken} = require('../Middlewares/auth');
 const { signUp,
-    updateUser,
-    getUser,
-    deleteUser,
-    login, logout} = require('../Controllers/userController')
+
+   
+    login, logout,getOneUser} = require('../Controllers/userController')
 
     userRouter.route('/login').post(login);
     userRouter.route('/register').post(signUp);
-    userRouter.route('/me').get(protect,getUser)
+    userRouter.route('/me').get(authenticateToken, getOneUser);
+  
 
 
     module.exports = userRouter;

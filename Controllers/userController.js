@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const config = require('../config');
 
- signUp = async (req , res) =>{
-    const {name, email, password} = req.body
+
+ const signUp = async (req , res, next) =>{
+   try { const {name, email, password} = req.body
 
     if(!name || !email || !password) {
         throw new Error('Please add all fields')
@@ -27,17 +28,16 @@ const config = require('../config');
     password: hashedPassword,
   })
   let token = jwt.sign({ userId: user._id }, config.secretKey);
-  res.cookie('token', token, config.cookieOptions);
-  if (user) {
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: token,
-    })
-  } else {
-    res.status(400)
-    throw new Error('Invalid User data')
+  res
+      .cookie('token', token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60,
+        sameSite: 'none',
+        secure: true,
+      })
+      .sendStatus(201);
+  } catch (error) {
+    next(error);
   }
 
 }
@@ -53,17 +53,17 @@ updateUser = async (req, res)  =>{
 
     }
 
-    User.findOne({_id :req.params.id} , (err, profile) =>{
+    User.findOne({_id :req.params.id} , (err, user) =>{
         if(err) {
             return res.status(404).json({
                 err,
                 message: 'Profile not found!',
             })
         }
-        User.name = body.name;
-        User.email = body.email;
-        User.password = body.password;
-        User.save()
+        user.name = body.name;
+        user.email = body.email;
+        user.password = body.password;
+        user.save()
         .then(() => {
             return res.status(200).json({
                 success: true,
@@ -83,24 +83,7 @@ updateUser = async (req, res)  =>{
 }
 
 deleteUser = async (req, res) => {
-    await Profile.findOneAndDelete({ _id: req.params.id }, (err, profile) => {
-        if (err) {
-            return res.status(400).json({ success: false, error: err })
-        }
-
-        if (!movie) {
-            return res
-                .status(404)
-                .json({ success: false, error: `Profile not found` })
-        }
-
-        return res.status(200).json({ success: true, data: profile })
-    }).catch(err => console.log(err))
-}
-
-getUser = async (req, res) => {
-    await 
-    User.findOne({ _id: req.params.id }, (err, user) => {
+    await User.findOneAndDelete({ _id: req.params.id }, (err, user) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -110,9 +93,19 @@ getUser = async (req, res) => {
                 .status(404)
                 .json({ success: false, error: `Profile not found` })
         }
-        return res.status(200).json({ success: true, data: user })
+
+        return res.status(200).json({ success: true, data: profile })
     }).catch(err => console.log(err))
 }
+
+const getOneUser = async (req, res, next) => {
+  try {
+    const findUser = await User.findById(req.userId);
+    res.status(200).json(findUser);
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 const login = async (req, res) => {
@@ -131,15 +124,20 @@ const login = async (req, res) => {
     }
 
     
-    const token = jwt.sign({ userId: user._id }, config.secretKey);
-    res.cookie('token', token, config.cookieOptions);
-    
-    return res.json({ message: 'Authentication successful.', token });
+    const token = jwt.sign({ userId: user._id}, config.secretKey);
+    return res
+      .cookie('token', token, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60,
+        sameSite: 'none',
+        secure: true,
+      })
+      .sendStatus(200);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server error.' });
+    next(error);
   }
 };
+
 
 const logout = (req, res, next) => {
     try {
@@ -163,7 +161,7 @@ const generateToken = (id) => {
 module.exports = {
     signUp,
     updateUser,
-    getUser,
+    getOneUser,
     deleteUser,
     login,
     logout

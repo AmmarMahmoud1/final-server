@@ -35,7 +35,6 @@ postRouter.post("/add", upload.single('image') , async (req, res, next) => {
     try {
     
     const result = await cloudinary.uploader.upload(req.file.path);
-    console.log(req.file.path);
       const newPost = await Post.create({
         postType: req.body.postType,
         title : req.body.title,

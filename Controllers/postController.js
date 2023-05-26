@@ -1,10 +1,9 @@
-const cookieParser = require('cookie-parser')
+
 const Post = require('../Models/post');
 const User = require('../Models/User')
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const cloudinary = require('../utils/cloudinary')
-const upload = require('../utils/multer')
+
+
 
 
 
@@ -27,7 +26,6 @@ res.status(200).json(posts);
 
 const getSearch = async (req, res) =>{
   const posts = (await Post.find({postType:"Search"}).catch(err => console.log(err)) );
-  console.log(posts)
   res.status(200).json(posts);
   
   }
@@ -91,7 +89,6 @@ const getJobs = async (req, res ) =>{
 const updatePost = async (req , res) =>{
  const post = await Post.findById(req.params.id);
  const token = req.cookies.token;
- console.log(req.cookies)
  let decoded = jwt.verify(token, 'Ammar221');
  req.userId = decoded.userId;
  if(!post) {
@@ -121,7 +118,6 @@ const updatePost = async (req , res) =>{
 const deletePost = async (req, res) =>{
     const post  = await Post.findById(req.params.id)
     const token = req.cookies.token;
-    console.log(req.cookies)
    let decoded = jwt.verify(token, 'Ammar221');
     req.userId = decoded.userId;
 
