@@ -33,7 +33,7 @@ const config = require('../config');
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
         sameSite: 'none',
-        secure: false,
+        secure: true,
       })
       .sendStatus(201);
   } catch (error) {

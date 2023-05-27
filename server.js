@@ -7,7 +7,7 @@ const app = express()
 const cors = require('cors');
 
 
-
+app.get('/', (req, res) => res.send('The server running well'));
 
 app.use(bodyParser.json());
 
@@ -22,7 +22,7 @@ app.use(cors({
   credentials: true,
   origin: [
     'http://localhost:3000',
-    'https://searchandoffer.onrender.com'
+    'http://searchandoffer.onrender.com'
   ],
 }))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
