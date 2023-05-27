@@ -24,7 +24,6 @@ app.use(cors({
     'http://localhost:3000',
     'https://searchandoffer.onrender.com'
   ],
-  optionsSuccessStatus: 200,
 }))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use('/api/user', require('./Routes/userRoutes'))
