@@ -98,17 +98,10 @@ deleteUser = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
-const getOneUser = async (req, res, next) => {
-  try {
-    const findUser = await User.findById(req.userId);
-    res.status(200).json(findUser);
-  } catch (error) {
-    next(error);
-  }
-};
 
 
-const login = async (req, res) => {
+
+const login = async (req, res,next) => {
   const { email, password } = req.body;
   console.log(password)
   
@@ -132,13 +125,20 @@ const login = async (req, res) => {
         sameSite: 'none',
         secure: true,
       })
-      .sendStatus(200).json(User.name);
+      .sendStatus(200);
   } catch (error) {
     next(error);
   }
 };
 
-
+const getOneUser = async (req, res, next) => {
+  try {
+    const findUser = await User.findById(req.userId);
+    res.status(200).json(findUser);
+  } catch (error) {
+    next(error);
+  }
+};
 const logout = (req, res, next) => {
     try {
       res
@@ -160,9 +160,9 @@ const generateToken = (id) => {
 
 module.exports = {
     signUp,
-    updateUser,
+   
     getOneUser,
-    deleteUser,
+    
     login,
     logout
 }

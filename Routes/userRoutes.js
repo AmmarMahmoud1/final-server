@@ -6,7 +6,7 @@ userRouter.use(cookieParser());
 
 
 
-const authenticateToken = require('../Middlewares/auth');
+const {authenticateToken} = require('../Middlewares/authenticateToken');
 const { signUp,
 
    
@@ -14,7 +14,7 @@ const { signUp,
 
     userRouter.route('/login').post(login);
     userRouter.route('/register').post(signUp);
-    userRouter.route('/me').get(authenticateToken, getOneUser);
+    userRouter.get('me',authenticateToken, getOneUser);
   
 
 
