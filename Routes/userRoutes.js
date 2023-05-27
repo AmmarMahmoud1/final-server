@@ -14,7 +14,7 @@ const { signUp,
 
     userRouter.route('/login').post(login);
     userRouter.route('/register').post(signUp);
-    userRouter.get('me',authenticateToken, getOneUser);
+    userRouter.get('/me',authenticateToken, getOneUser);
   
 
 
