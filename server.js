@@ -25,14 +25,14 @@ app.use(cors({
   credentials: true,
   origin: [
     'http://localhost:3000',
-    /https:\/\/wd37-rubber-ducks\.netlify\.app/,
+    /https:\/\/string\.netlify\.app/,
   ],
   optionsSuccessStatus: 200,
 }))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use('/api/user', require('./Routes/userRoutes'))
 app.use('/api' , require('./Routes/postRoutes'))
-app.use("/api/message", messageRoute);
+app.use("/api/messages", messageRoute);
 
 
 

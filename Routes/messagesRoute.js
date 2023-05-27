@@ -3,8 +3,8 @@ const { addMessage, getAllMessage } = require("../Controllers/messagesController
 
 const router = require("express").Router();
 
-router.post("/addmsg/", addMessage);
-router.get("/getmsg/", getAllMessage);
+router.post("/addmsg", addMessage);
+router.get("/all", getAllMessage);
 
 
 

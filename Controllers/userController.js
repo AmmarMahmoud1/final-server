@@ -132,7 +132,7 @@ const login = async (req, res) => {
         sameSite: 'none',
         secure: true,
       })
-      .sendStatus(200);
+      .sendStatus(200).json(User.name);
   } catch (error) {
     next(error);
   }
