@@ -38,8 +38,8 @@ module.exports.getAllMessage = async (req, res) => {
   let decoded = jwt.verify(token, 'Ammar221');
    req.userId = decoded.userId;
 
-    const messages = await   messageModel.find({"$or":[{ senderId: req.userId},{receiverId: req.userId}]}).catch(err => console.log(err))
-     res.json(messages)
+    const messages = await   messageModel.find({}).catch(err => res.status(500).send('Server Error'))
+     res.status(200).json(messages)
 
    
     
