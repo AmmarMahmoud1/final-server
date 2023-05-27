@@ -1,11 +1,14 @@
+const express = require('express')
+const cookieParser = require("cookie-parser")
+const messageRouter = express.Router();
+
+messageRouter.use(cookieParser());
+
 const { addMessage, getAllMessage } = require("../Controllers/messagesController");
 
-
-const router = require("express").Router();
-
-router.post("/addmsg", addMessage);
-router.get("/all", getAllMessage);
+messageRouter.route('/addmsg').post( addMessage);
+messageRouter.route('/all').get( getAllMessage);
 
 
 
-module.exports = router;
+module.exports = messageRouter;

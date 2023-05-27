@@ -1,6 +1,6 @@
 const messageModel = require("../Models/message");
 const jwt = require('jsonwebtoken');
-module.exports.addMessage = async (req, res, next) => {
+ const addMessage = async (req, res, next) => {
 
   const token = req.cookies.token;
   let decoded = jwt.verify(token, 'Ammar221');
@@ -31,7 +31,7 @@ module.exports.addMessage = async (req, res, next) => {
 
 
 
-module.exports.getAllMessage = async (req, res) => {
+const getAllMessage = async (req, res) => {
     
 
     const token = req.cookies.token;
@@ -52,3 +52,6 @@ module.exports.getChat = async (req,res) =>{
     res.json(chat)
 }
 
+module.exports = {
+    getAllMessage, addMessage
+}

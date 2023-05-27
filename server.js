@@ -7,7 +7,6 @@ const multer = require('multer');
 const path = require('path');
 const app = express()
 const cors = require('cors');
-const messageRoute = require("./Routes/messagesRoute");
 const socket = require("socket.io");
 
 
@@ -32,7 +31,7 @@ app.use(cors({
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use('/api/user', require('./Routes/userRoutes'))
 app.use('/api' , require('./Routes/postRoutes'))
-app.use("/api/messages", messageRoute);
+app.use("/api/messages", require('./Routes/messagesRoute'));
 
 
 
