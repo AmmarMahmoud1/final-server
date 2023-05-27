@@ -39,7 +39,7 @@ const getAllMessage = async (req, res) => {
    req.userId = decoded.userId;
 
     const messages = await   messageModel.find({}).catch(err => res.status(500).send('Server Error'))
-     res.status(200).json(messages)
+     res.status(200).json(messages);
 
    
     

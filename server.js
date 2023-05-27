@@ -3,17 +3,15 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const multer = require('multer');
-const path = require('path');
 const app = express()
 const cors = require('cors');
-const socket = require("socket.io");
+
 
 
 
 app.use(bodyParser.json());
 
-const PORT = 5000 || process.env.PORT;
+const PORT = 3000|| process.env.PORT;
 
 const db = require('./db');
 
@@ -24,7 +22,7 @@ app.use(cors({
   credentials: true,
   origin: [
     'http://localhost:3000',
-    /https:\/\/string\.netlify\.app/,
+    'https://searchandoffer.onrender.com'
   ],
   optionsSuccessStatus: 200,
 }))
@@ -36,7 +34,7 @@ app.use("/api/messages", require('./Routes/messagesRoute'));
 
 
 
- const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(` app listening on port ${PORT}`)
   });
 
