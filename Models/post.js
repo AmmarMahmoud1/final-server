@@ -1,18 +1,21 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-  category :{
+   postType :{
     type: String,
    
 
   },
-   postType :{
+   title :{
     type : String,
 
    },
-  title: {
+   category : {
     type: String,
     
+  },
+  price : {
+    type: String,
   },
 
   content: {
@@ -26,6 +29,11 @@ const postSchema = new mongoose.Schema({
 
    
   },
+  image: {
+    type: String
+  
+
+ },
   Address:{
     type: String
   },
@@ -33,10 +41,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     
   },
-    image: {
-      type: String
-    
-  
+   city :{
+    type: String
    },
    cloudinary_id: {
     type: String
