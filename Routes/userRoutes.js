@@ -9,11 +9,13 @@ const {
   signUp,
   login,
   logout,
-  getOneUser,
+  getMe,
+  getOneUser
 } = require("../Controllers/userController");
 
 userRouter.route("/login").post(login);
 userRouter.route("/register").post(signUp);
-userRouter.get("/me", authenticateToken, getOneUser);
+userRouter.get("/me", authenticateToken, getMe);
+userRouter.get("/:id",getOneUser);
 
 module.exports = userRouter;

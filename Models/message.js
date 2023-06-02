@@ -3,21 +3,21 @@ const mongoose = require("mongoose");
 const messageSchema = mongoose.Schema(
   {
     message: {
-      text: { type: String, required: true },
+       type: String,
     },
     senderId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: true
+        
       },
     receiverId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true
+     
     },
     postId :{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
-        required: true
+        
     }
   },
   {

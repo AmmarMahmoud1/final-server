@@ -63,7 +63,7 @@ postRouter.post("/add", upload.single("image"), async (req, res) => {
       return res.status(201).json(newPost);
     }
   } catch (error) {
-    console.log("Error: Cannot create a new instance of an image");
+    console.log("Error: Cannot create a new instance");
   }
 });
 

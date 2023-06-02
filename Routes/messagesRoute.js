@@ -8,6 +8,6 @@ const { addMessage, getAllMessage,getPostMessages } = require("../Controllers/me
 
 messageRouter.route('/addmsg').post( addMessage);
 messageRouter.route('/all').get( getAllMessage);
-messageRouter.route('/post/allmessages/:postId').get(getPostMessages)
+messageRouter.route('/post/allmessages/:postId?').get(getPostMessages)
 
 module.exports = messageRouter;

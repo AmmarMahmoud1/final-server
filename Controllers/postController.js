@@ -101,13 +101,19 @@ const deletePost = async (req, res) => {
 
 
 const getOnePost = async (req, res) => {
-  console.log(req.params.id);
-  const id = req.params.id;
-
-  const post = await Post.find({ _id: id }).catch((err) =>
-    res.status(500).send("Server Error")
-  );
-  res.status(200).json(post);
+  try {
+    if (req.params.id) {
+      const id = req.params.id;
+      const postObj = await Post.findById(id).catch((err) => {
+        throw err; // Rethrow the error to be caught by the error handler
+      });
+      res.status(200).json(postObj);
+    } else {
+      res.status(404).json('Not found');
+    }
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
 };
 
 module.exports = {

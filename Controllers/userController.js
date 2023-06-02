@@ -123,7 +123,7 @@ const login = async (req, res, next) => {
   }
 };
 
-const getOneUser = async (req, res, next) => {
+const getMe = async (req, res, next) => {
   try {
     const findUser = await User.findById(req.userId);
     res.status(200).json(findUser);
@@ -131,6 +131,23 @@ const getOneUser = async (req, res, next) => {
     next(error);
   }
 };
+
+const getOneUser = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ success: false, error: 'Invalid user ID' });
+    }
+    next(error);
+  }
+};
+
 const logout = (req, res, next) => {
   try {
     res
@@ -150,6 +167,7 @@ const generateToken = (id) => {
 
 module.exports = {
   signUp,
+  getMe,
   getOneUser,
   login,
   logout,
