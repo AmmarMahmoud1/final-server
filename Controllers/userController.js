@@ -114,7 +114,6 @@ const login = async (req, res, next) => {
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
-        domain: '.onrender.com',
         secure: false,
         sameSite: 'None',
       })
