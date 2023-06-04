@@ -33,7 +33,6 @@ const signUp = async (req, res, next) => {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
         sameSite: "none",
-      doamin : 'https://searchandoffer1.onrender.com',
         secure: true,
       })
       .sendStatus(201);
@@ -116,6 +115,7 @@ const login = async (req, res, next) => {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
         secure: false,
+      domain : 'searchandoffer1.onrender.com',
         sameSite: 'None',
       })
       .sendStatus(200);
