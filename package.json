@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No test specified\"",
+
+    
+    "test": "echo \"no test specified\"",
     "start": "nodemon server.js"
   },
   "keywords": [],
