@@ -10,7 +10,7 @@ app.get("/", (req, res) => res.send("The server running well"));
 
 app.use(bodyParser.json());
 
-const PORT = 5000 || process.env.PORT;
+const PORT = 8080 || process.env.PORT;
 
 const db = require("./db");
 
