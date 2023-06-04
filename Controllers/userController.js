@@ -109,12 +109,11 @@ const login = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid password." });
     }
 
-    const token = jwt.sign({ userId: user._id }, config.secretKey);
-    return res
+   let token = jwt.sign({ userId: user._id }, config.secretKey);
+   res
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
-        domain: '.onrender.com',
         secure: false,
         sameSite: 'None',
       })
