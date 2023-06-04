@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "http://searchandoffer.onrender.com"],
+    origin: ["http://localhost:3000", "https://searchandoffer1.onrender.com"],
   })
 );
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
