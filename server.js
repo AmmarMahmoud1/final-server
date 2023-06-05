@@ -4,11 +4,13 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
-const cors = require("cors");
-app.use(cors( {"origin": "*",
-"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-"preflightContinue": false,
-"optionsSuccessStatus": 204}));
+app.use(express.json());
+
+// const cors = require("cors");
+// app.use(cors( {"origin": "*",
+// "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+// "preflightContinue": false,
+// "optionsSuccessStatus": 204}));
 
 app.get("/", (req, res) => res.send("The server running well"));
 
@@ -18,7 +20,6 @@ const PORT = 8080 || process.env.PORT;
 
 const db = require("./db");
 
-app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
