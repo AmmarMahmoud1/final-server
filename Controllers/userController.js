@@ -112,8 +112,9 @@ const login = async (req, res, next) => {
    let token = jwt.sign({ userId: user._id }, config.secretKey);
   res.cookie("token", token, {
         maxAge: 1000 * 60 * 60,
-        secure: true,
-        sameSite: 'None', 
+        secure: false,
+        sameSite: 'None',
+        
       }).sendStatus(200);
   } catch (error) {
     next(error);
