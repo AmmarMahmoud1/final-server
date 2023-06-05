@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
 const cors = require("cors");
+app.use(cors());
 
 app.get("/", (req, res) => res.send("The server running well"));
 
@@ -17,9 +18,7 @@ const db = require("./db");
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  cors()
-);
+
 // app.use(
 //   cors({
 //     credentials: true,
