@@ -9,7 +9,7 @@ app.use(express.json());
 const cors = require("cors");
 const corsOptions = {
   credentials: true,
-  origin: 'https://searchandoffer1.onrender.com',
+  origin: ['https://searchandoffer1.onrender.com', 'http://localhost:3000/']
 };
 
 app.use(cors(corsOptions));
