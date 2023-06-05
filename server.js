@@ -36,6 +36,11 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use("/api/user", require("./Routes/userRoutes"));
 app.use("/api", require("./Routes/postRoutes"));
 app.use("/api/messages", require("./Routes/messagesRoute"));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000','https://searchandoffer1.onrender.com');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
