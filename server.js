@@ -7,12 +7,13 @@ const app = express();
 app.use(express.json());
 
 const cors = require("cors");
-const corsOptions ={
-  origin:['http://localhost:3000','https://searchandoffer1.onrender.com/'],
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+// app.use(cors({origin:'*'}));
+app.use(cors({
+  credentials: true,
+  origin: 'https://searchandoffer1.onrender.com'
+}));
+// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
 
 app.get("/", (req, res) => res.send("The server running well"));
 
@@ -32,8 +33,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use("/api/user", require("./Routes/userRoutes"));
 app.use("/api", require("./Routes/postRoutes"));
 app.use("/api/messages", require("./Routes/messagesRoute"));
-// Middleware to handle preflight requests
-app.use(express.static(__dirname)); //here is important thing - no static directory, because all static :)
 
 app.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
