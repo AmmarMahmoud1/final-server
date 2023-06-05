@@ -110,15 +110,12 @@ const login = async (req, res, next) => {
     }
 
    let token = jwt.sign({ userId: user._id }, config.secretKey);
-   res
-      .cookie("token", token, {
+  res.cookie("token", token, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
-        secure: false,
-      domain : 'searchandoffer1.onrender.com',
+        secure: true,
         sameSite: 'None',
-      })
-      .sendStatus(200);
+      }).sendStatus(200);
   } catch (error) {
     next(error);
   }

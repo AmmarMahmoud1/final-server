@@ -6,11 +6,10 @@ const cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
 
-// const cors = require("cors");
-// app.use(cors( {"origin": "*",
-// "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-// "preflightContinue": false,
-// "optionsSuccessStatus": 204}));
+const cors = require("cors");
+// app.use(cors({origin:'*'}));
+app.use(cors({credentials: true, origin: 'https://searchandoffer1.onrender.com/'}));
+// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 app.get("/", (req, res) => res.send("The server running well"));
 
