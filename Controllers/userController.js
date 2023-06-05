@@ -111,7 +111,6 @@ const login = async (req, res, next) => {
 
    let token = jwt.sign({ userId: user._id }, config.secretKey);
   res.cookie("token", token, {
-        httpOnly: true,
         maxAge: 1000 * 60 * 60,
         secure: true,
         sameSite: 'None',

@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 
 const cors = require("cors");
-// app.use(cors({origin:'*'}));
 app.use(cors({
   credentials: true,
   origin: 'https://searchandoffer1.onrender.com'
