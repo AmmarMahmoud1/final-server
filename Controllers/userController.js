@@ -114,6 +114,7 @@ const login = async (req, res, next) => {
         maxAge: 1000 * 60 * 60,
         secure: true,
         sameSite: 'None',
+        domain: 'https://searchandoffer1.onrender.com', 
       }).sendStatus(200);
   } catch (error) {
     next(error);

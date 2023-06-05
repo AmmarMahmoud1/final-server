@@ -7,10 +7,13 @@ const app = express();
 app.use(express.json());
 
 const cors = require("cors");
-app.use(cors({
+const corsOptions = {
   credentials: true,
-  origin: 'https://searchandoffer1.onrender.com'
-}));
+  origin: 'https://searchandoffer1.onrender.com',
+  exposedHeaders: ['set-cookie'], // Allow the frontend to access the "set-cookie" header
+};
+
+app.use(cors(corsOptions));
 // app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 
