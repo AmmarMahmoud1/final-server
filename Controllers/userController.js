@@ -115,7 +115,7 @@ const login = async (req, res, next) => {
         secure: true,
         sameSite: 'None',
         httpOnly:true,
-        domain: 'searchandoffer1.onrender.com'
+        domain:'searchandoffer1.onrender.com'
         
       }).sendStatus(200);
   } catch (error) {
