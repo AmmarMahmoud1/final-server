@@ -113,8 +113,7 @@ const login = async (req, res, next) => {
   res.cookie("token", token, {
         maxAge: 1000 * 60 * 60,
         secure: true,
-        sameSite: 'None',
-        domain: 'https://searchandoffer1.onrender.com', 
+        sameSite: 'None', 
       }).sendStatus(200);
   } catch (error) {
     next(error);
