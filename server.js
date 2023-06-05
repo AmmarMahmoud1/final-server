@@ -10,7 +10,6 @@ const cors = require("cors");
 const corsOptions = {
   credentials: true,
   origin: 'https://searchandoffer1.onrender.com',
-  exposedHeaders: ['set-cookie'], // Allow the frontend to access the "set-cookie" header
 };
 
 app.use(cors(corsOptions));
