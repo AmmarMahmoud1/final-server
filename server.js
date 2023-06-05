@@ -18,11 +18,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:3000", "https://searchandoffer1.onrender.com", "https://searchandoffer.onrender.com"],
-  })
+  cors()
 );
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: ["http://localhost:3000", "https://searchandoffer1.onrender.com", "https://searchandoffer.onrender.com"],
+//   })
+// );
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // ROUTES
