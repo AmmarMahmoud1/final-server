@@ -5,7 +5,10 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
 const cors = require("cors");
-app.use(cors());
+app.use(cors( {"origin": "*",
+"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+"preflightContinue": false,
+"optionsSuccessStatus": 204}));
 
 app.get("/", (req, res) => res.send("The server running well"));
 
