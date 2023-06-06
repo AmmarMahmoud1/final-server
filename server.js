@@ -8,8 +8,8 @@ app.use(express.json());
 
 const cors = require("cors");
 const corsOptions ={
-  origin:['/http://localhost:3000/',
-  /https:\/\/searchandoffer\.netlify\.app/,],
+  origin:['http://localhost:3000/','https://647f222e37edbb0008a8432e--searchandoffer.netlify.app/'
+  ],
   credentials:true,        
   optionSuccessStatus:200
 }
@@ -28,9 +28,7 @@ const db = require("./db");
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
-});
+
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // ROUTES
