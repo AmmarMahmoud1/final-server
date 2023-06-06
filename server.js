@@ -9,7 +9,7 @@ app.use(express.json());
 const cors = require("cors");
 const corsOptions ={
   origin:['/http://localhost:3000/',
-    /https:\/\/searchandoffer1\.onrender\.com/],
+  /https:\/\/searchandoffer\.netlify\.app/,],
   credentials:true,        
   optionSuccessStatus:200
 }
