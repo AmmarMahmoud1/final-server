@@ -7,13 +7,14 @@ const app = express();
 app.use(express.json());
 
 const cors = require("cors");
-const corsOptions = {
-  credentials: true,
-  origin: ['https://searchandoffer1.onrender.com', 'http://localhost:3000/']
-};
-
+const corsOptions ={
+  origin:['/http://localhost:3000/',
+    /https:\/\/searchandoffer1\.onrender\.com/],
+  credentials:true,        
+  optionSuccessStatus:200
+}
 app.use(cors(corsOptions));
-// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
 
 
 app.get("/", (req, res) => res.send("The server running well"));

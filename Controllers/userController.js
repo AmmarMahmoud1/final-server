@@ -111,8 +111,6 @@ const login = async (req, res, next) => {
 
    let token = jwt.sign({ userId: user._id }, config.secretKey);
    // Set the appropriate CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Origin', 'https://searchandoffer1.onrender.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
 
   res.cookie("token", token, {
@@ -120,7 +118,7 @@ const login = async (req, res, next) => {
         secure: true,
         sameSite: 'None',
         httpOnly:true,
-        domain:'searchandoffer1.onrender.com'
+
         
       }).sendStatus(200);
   } catch (error) {
