@@ -1,5 +1,4 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
+
 const messageModel = require("../Models/message");
 const userModel = require('../Models/User');
 const postModel = require('../Models/User');
@@ -35,9 +34,9 @@ const getAllMessage = async (req, res) => {
   const token = req.cookies.token;
   let decoded = jwt.verify(token, "Ammar221");
   req.userId = decoded.userId;
-
+  
   const messages = await messageModel
-    .find({ receiverId: req.userId })
+    .find({$or: [{ receiverId: req.userId }, { senderId: req.userId }]})
     .catch((err) => res.status(500).send("Server Error"));
   res.status(200).json(messages);
 };
