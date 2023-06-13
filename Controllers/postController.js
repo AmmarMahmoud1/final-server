@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const getAll = async (req, res) => {
   const posts = await Post.find({})
-    .limit(10)
     .sort("+createdOn")
     .catch((err) => res.status(500).send("Server Error"));
   res.status(200).json(posts);
